@@ -118,6 +118,10 @@ The primary focus of the project was to incorporate clustering methodologies and
 |3. Polynomial Regression(degree=2)| 0.16806     | 0.15743       |
 |4. OLS (Unscaled Data)            | 0.16813     | 0.15738       |
 
+- RMSE for Polynomial Model, degrees=2
+  - Training/In-Sample:  0.16812589644110204 
+  - Validation/Out-of-Sample:  0.16581584996771273
+
 
 ### IV. Data Context
 ---
