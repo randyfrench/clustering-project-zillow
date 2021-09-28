@@ -7,15 +7,19 @@ I.   [Project Overview             ](#i-project-overview)
 1.   [Description                  ](#1-description)
 2.   [Deliverables                 ](#2-deliverables)
 
-II.  [Project & Executive Summary  ](#ii-project-summary)
-1.   [Goals                        ](#1-goals)
-2.   [Questions & Hypothesis       ](#2-questions--hypothesis)
-3.   [Findings                     ](#3-findings)
+II.  [Executive Summary  ](#ii-executive-summary)
+1.   [Goals:                        ](#1-goals)
+2.   [Key Findings:                 ](#2-key-findings)
+3.   [Recommendations:              ](#1-recommendations)
 
-III. [Data Context                 ](#iii-data-context)
+III. [Project                      ](#iii-project)
+1.   [Questions & Hypothesis       ](#1-questions--hypothesis)
+2.   [Findings                     ](#2-findings)
+
+IV. [Data Context                 ](#iv-data-context)
 1.   [Data Dictionary              ](#1-data-dictionary)
 
-IV.  [Process                      ](#iv-process)
+V.  [Process                      ](#v-process)
 1.   [Project Planning             ](#1-project-planning)
 2.   [Data Acquisition             ](#2-data-acquisition)
 3.   [Data Preparation             ](#3-data-preparation)
@@ -23,9 +27,9 @@ IV.  [Process                      ](#iv-process)
 5.   [Modeling & Evaluation        ](#5-modeling--evaluation)
 6.   [Product Delivery             ](#6-product-delivery)
 
-V.   [Modules                      ](#v-modules)
+VI.   [Modules                      ](#vi-modules)
 
-VI.  [Project Reproduction         ](#vi-project-reproduction)
+VII.  [Project Reproduction         ](#vii-project-reproduction)
 
 <br>
 
@@ -50,28 +54,31 @@ The primary focus of the project was to incorporate clustering methodologies and
 
 
 
-### II. Project & Executive Summary
+### II. Executive Summary
 ---
 
-#### 1. Goals
+#### 1. Goals:
 
-- The primary focus of the project was to incorporate clustering methodologies and discover potential drivers of the log_error of the Zillow® Zestimate for single-unit properties sold during 2017. In this context, log_error is equal to 𝑙𝑜𝑔(𝑍𝑒𝑠𝑡𝑖𝑚𝑎𝑡𝑒) − 𝑙𝑜𝑔(𝑆𝑎𝑙𝑒𝑃𝑟𝑖𝑐𝑒). 
+- Incorporate clustering methodologies and discover potential drivers of the log_error of the Zillow® Zestimate for single-unit properties sold during 2017. In this context, log_error is equal to 𝑙𝑜𝑔(𝑍𝑒𝑠𝑡𝑖𝑚𝑎𝑡𝑒) − 𝑙𝑜𝑔(𝑆𝑎𝑙𝑒𝑃𝑟𝑖𝑐𝑒). 
 - Create modules storing functions of each step of the data pipeline
 - Thoroughly document each step
 - Construct at least 4 models
 - Make sure project is reproduceable
 
-#### Key findings:
+#### 2. Key findings:
 - The tests rejected all four Null Hypothesis
 - There is a relationship between these features and logerror
 - The 2nd Degree Ploynomial regression model performed the best
 
-#### Recommendations:
+#### 3. Recommendations:
 - I would like to continue to look into other features to use for clusters (such as age vs sqft)
 - I would like to perform more testing to find better models to use to determine logerror
 
+---
 
-#### 2. Questions & Hypothesis
+### III. Project
+
+#### 1. Questions & Hypothesis
 
 - Is there a correlation between logerror and bathroom count
 - Is there a correlation between logerror and lot size square feet
@@ -97,7 +104,7 @@ The primary focus of the project was to incorporate clustering methodologies and
 
 
 
-### 3. Findings
+### 2. Findings
 #### My findings are:
 - The tests rejected all four Null Hypothesis
 - There is a relationship between these features and logerror
@@ -112,7 +119,7 @@ The primary focus of the project was to incorporate clustering methodologies and
 |4. OLS (Unscaled Data)            | 0.16813     | 0.15738       |
 
 
-### III. Data Context
+### IV. Data Context
 ---
 
 #### 1. Data Dictionary
@@ -149,7 +156,7 @@ Following acquisition and preparation of the initial SQL database, the DataFrame
 
 * Target variable
 
-### IV. Process
+### V. Process
 ---
 - See my Trello board [Clustering with Zillow](https://trello.com/b/4xTXow9H/clustering-with-zillow)
 
@@ -212,15 +219,15 @@ Following acquisition and preparation of the initial SQL database, the DataFrame
 - [x] With additional time, continue with exploration beyond MVP
 - [x] Proof read and complete README and project repository
 
-### V. Modules
+### VI. Modules
 ---
 
 The created modules used in this project below contain full comments an docstrings to better understand their operation. Where applicable, all functions used `random_state=123` at all times. Use of functions requires access credentials to the Codeup database and an additional module named `env.py`. See project reproduction for more detail.
 
-- [`acquire`](): contains functions used in initial data acquisition leading into the prepare phase
-- [`wrangle`](): contains functions to prepare data in the manner needed for this specific project needs
+- [`acquire`](https://raw.githubusercontent.com/randyfrench/clustering-project-zillow/main/acquire.py): contains functions used in initial data acquisition leading into the prepare phase
+- [`wrangle_zillow`](https://raw.githubusercontent.com/randyfrench/clustering-project-zillow/main/wrangle_zillow.py): contains functions to prepare data in the manner needed for this specific project needs
 
-### VI. Project Reproduction
+### VII. Project Reproduction
 ---
 
 To recreate and reproduce results of this project, you will need to create a module named `env.py`. This file will need to contain login credentials for the Codeup database server stored in their respective variables named `host`, `username`, and `password`. You will also need to create the following function within. This is used in all functions that acquire data from the SQL server to create the URL for connecting. `db` needs to be passed as a string that matches exactly with the name of a database on the server.
