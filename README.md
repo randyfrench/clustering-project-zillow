@@ -7,7 +7,7 @@ I.   [Project Overview             ](#i-project-overview)
 1.   [Description                  ](#1-description)
 2.   [Deliverables                 ](#2-deliverables)
 
-II.  [Project Summary              ](#ii-project-summary)
+II.  [Project & Executive Summary  ](#ii-project-summary)
 1.   [Goals                        ](#1-goals)
 2.   [Questions & Hypothesis       ](#2-questions--hypothesis)
 3.   [Findings                     ](#3-findings)
@@ -50,7 +50,7 @@ The primary focus of the project was to incorporate clustering methodologies and
 
 
 
-### II. Project Summary
+### II. Project & Executive Summary
 ---
 
 #### 1. Goals
@@ -60,6 +60,16 @@ The primary focus of the project was to incorporate clustering methodologies and
 - Thoroughly document each step
 - Construct at least 4 models
 - Make sure project is reproduceable
+
+#### Key findings:
+- The tests rejected all four Null Hypothesis
+- There is a relationship between these features and logerror
+- The 2nd Degree Ploynomial regression model performed the best
+
+#### Recommendations:
+- I would like to continue to look into other features to use for clusters (such as age vs sqft)
+- I would like to perform more testing to find better models to use to determine logerror
+
 
 #### 2. Questions & Hypothesis
 
@@ -100,7 +110,6 @@ The primary focus of the project was to incorporate clustering methodologies and
 |2. LassoLars (alpha 2)            | 0.16828     | 0.15740       |
 |3. Polynomial Regression(degree=2)| 0.16806     | 0.15743       |
 |4. OLS (Unscaled Data)            | 0.16813     | 0.15738       |
-|----------------------------------|-------------|---------------|
 
 
 ### III. Data Context
@@ -145,14 +154,14 @@ Following acquisition and preparation of the initial SQL database, the DataFrame
 - See my Trello board [Clustering with Zillow](https://trello.com/b/4xTXow9H/clustering-with-zillow)
 
 #### 1. Project Planning
-🟢 **Plan** ➜ ☐ _Acquire_ ➜ ☐ _Prepare_ ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
+✓ 🟢 **Plan** ➜ ☐ _Acquire_ ➜ ☐ _Prepare_ ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
-- [] Build this README containing:
+- [x] Build this README containing:
     - Project overview
     - Initial thoughts and hypotheses
     - Project summary
     - Instructions to reproduce
-- [] Plan stages of project and consider needs versus desires
+- [x] Plan stages of project and consider needs versus desires
 
 #### 2. Data Acquisition
 ✓ _Plan_ ➜ 🟢 **Acquire** ➜ ☐ _Prepare_ ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
@@ -196,12 +205,12 @@ Following acquisition and preparation of the initial SQL database, the DataFrame
 
 #### 6. Product Delivery
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ ✓ _Explore_ ➜ ✓ _Model_ ➜ 🟢 **Deliver**
-- [] Prepare Jupyter Notebook of project details through data science pipeline
+- [x] Prepare Jupyter Notebook of project details through data science pipeline
     - Python code clearly commented when necessary
     - Sufficiently utilize markdown
     - Appropriately title notebook and sections
-- [] With additional time, continue with exploration beyond MVP
-- [] Proof read and complete README and project repository
+- [x] With additional time, continue with exploration beyond MVP
+- [x] Proof read and complete README and project repository
 
 ### V. Modules
 ---
