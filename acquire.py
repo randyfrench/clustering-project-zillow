@@ -82,14 +82,4 @@ def get_zillow_data():
         df.to_csv('zillow.csv')
 
     return df
-  
-
-
-
-
-  
-   
-
-
-
-    
+     
