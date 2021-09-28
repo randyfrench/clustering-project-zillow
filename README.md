@@ -70,19 +70,19 @@ The primary focus of the project was to incorporate clustering methodologies and
 
 
 ## Hypothesis 1: Correlation Test (Logerror vs Bathroomcnt)
-- $H_0$: There is no correlation between logerror and taxamount
+- $H_o$: There is no correlation between logerror and taxamount
 - $H_a$: There ia a correlation between logerror and taxamount
 
 ## Hypothesis 2: Correlation Test (Logerror vs Lot size squarefeet)
-- $H_0$: There is no correlation between logerror and lotsizesquarefeet
+- $H_o$: There is no correlation between logerror and lotsizesquarefeet
 - $H_a$: There is a correlation between logerror and lotsizesquarefeet
 
 ## Hypothesis 3: Correlation Test ( Logerror vs Calculated finished square feet)
-- $H_0$: There is no correlation between logerror and calculatedfinishedsquarefeet
+- $H_o$: There is no correlation between logerror and calculatedfinishedsquarefeet
 - $H_a$: There is a correlation between logerror and calculatedfinishedsquarefeet
 
 ## Hypothesis 4: T-Test (Logerror vs Bedroomcnt)
-- $H_0$: There is no relationship between logerror and bedroomcnt
+- $H_o$: There is no relationship between logerror and bedroomcnt
 - $H_a$: There is a relationship between logerror and bedroomcnt
 
 
@@ -93,12 +93,14 @@ The primary focus of the project was to incorporate clustering methodologies and
 - There is a relationship between these features and logerror
 - The 2nd Degree Ploynomial regression model performed the best
 
-model	rmse_train	rmse_validate
-0	mean_baseline	0.16828	0.15740
-1	Model 1: OLS	0.16813	0.15738
-2	Model 2: LassoLars (alpha 2)	0.16828	0.15740
-3	Model 3: Polynomial Regression (degree=2)	0.16806	0.15743
-4	Model 4: OLS (Unscaled Data)	0.16813	0.15738
+| Model                            | rmse_train  | rmse_validate |
+|----------------------------------|:-----------:|---------------|
+|mean_baseline                     | 0.16828     | 0.15740       |
+|1. OLS                            | 0.16813     | 0.15738       |
+|2. LassoLars (alpha 2)            | 0.16828     | 0.15740       |
+|3. Polynomial Regression(degree=2)| 0.16806     | 0.15743       |
+|4. OLS (Unscaled Data)            | 0.16813     | 0.15738       |
+|----------------------------------|-------------|---------------|
 
 
 ### III. Data Context
@@ -108,35 +110,35 @@ model	rmse_train	rmse_validate
 
 Following acquisition and preparation of the initial SQL database, the DataFrames used in this project contain the following variables. Contained values are defined along with their respective data types.
 
-| Variable               | Definition                                         | Data Type  |
-|:----------------------:|:--------------------------------------------------:|:----------:|     |
-| bathrooms              | count of full- and half-bathrooms                  | float64    |
-| bed_sqft_age_clstr_#   | boolean for five clusters of bed_sqft_age          | uint8      |
-| bedrooms               | count of bedrooms                                  | int64      |
-| bedrooms_per_sqft      | ratio of bedrooms to structure_square_feet         | float64    |
-| census_tractcode       | US census tract codes for non-precise location     | float64    |
-| full_bathrooms         | count of only full-bathrooms                       | int64      |
-| la_county              | boolean for if county is within Los Angeles County | int64      |
-| land_value_usd         | value of land in U.S. dollars                      | float64    |
-| lat_long_clstr_#       | boolean for five clusters of lat_long              | uint8      |
-| latitude               | latitudinal geographic coordinate of property      | float64    |
-| log_error *            | difference of log(Zestimate) and log(SalePrice)    | float64    |
-| longitude              | longitudinal geographic coordinate of property     | float64    |
-| lot_rooms_clstr_#      | boolean for five clusters of lot_rooms             | uint8      |
-| lot_square_feet        | size of lot(land) in square feet                   | float64    |
-| orange_county          | boolean for if county is within Orange County      | int64      |
-| parcel_id              | unique identifier of property                      | int64      |
-| property_id            | unique identifier of property                      | int64      |
-| property_value_usd     | value of property in entirety in U.S. dollars      | float64    |
-| room_count             | count of bedrooms and full- and half-bathrooms     | float64    |
-| structure_square_feet  | dimensions of structure on property in square feet | float64    |
-| structure_value_usd    | value of structure on property in U.S. dollars     | float64    |
-| tax_amount_usd         | most recent tax payment from property owner        | float64    |
-| tract_size_age_clstr_# | boolean for five clusters of tract_size_age        | uint8      |
-| transaction_date       | most recent date of property sale                  | datetime64 |
-| year_built             | year structure was originally built                | int64      |
+| Variable                     | Definition                                         | Data Type  |
+|:----------------------------:|:--------------------------------------------------:|:----------:|     
+| bathroomcnt                  | count of bathrooms                                 | float64    |
+| bedroomcnt                   | count of bedrooms                                  | float64    |
+| buildingqualitytypeid        | the building struture quality                      | float64    |
+| calculatedfinishedsquarefeet | finished structure_square_feet                     | float64    |
+| fips.                        | Federal Information Processing Standards,          |            |
+|                              | unique county code                                 | float64    |
+| latitude                     | Property latitudinal location                      | float64    |
+| longitude                    | Property longitudinal locatio                      | float64    |
+| lotsizesquarefeet            | size of the lot in square feet                     | float64    |
+| rawcensustractandblock       | statistical subdivisions of a county               | float64    |
+| regionidcity                 | metropolitan area id for a city                    | float64    |
+| log_error *                  | difference of log(Zestimate) and log(SalePrice)    | float64    |
+| regionidcounty               | metropolitan area id for a county                  | float64    |
+| regionidzip                  | metropolitan area id for a zipcode                 | float64    |
+| roomcnt                      | total number of rooms                              | float64    |
+| unitcnt                      | how many single family units                       | float64    |
+| yearbuilt                    | year the property was built.                       | float64    |
+| structuretaxvaluedollarcnt   | vaule of the structure by taxing district          | float64    |
+| taxvaluedollarcnt            | value of property in entirety in U.S. dollars      | float64    |
+| assessmentyear               | year the tax was assessed                          | float64    |
+| landtaxvaluedollarcnt        | value of the land                                  | float64    |
+| taxamount                    | most recent tax payment from property owner        | float64    |
+| transactiondate              | most recent date of property sale                  | object     |
+| heatingorsystemdesc          | type of heating system used                        | object     |
+| county                       | the county the property is in                      | object     |    
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  * Target variable
+* Target variable
 
 ### IV. Process
 ---
@@ -204,13 +206,10 @@ Following acquisition and preparation of the initial SQL database, the DataFrame
 ### V. Modules
 ---
 
-The created modules used in this project below contain full comments an docstrings to better understand their operation. Where applicable, all functions used `random_state=` at all times. Use of functions requires access credentials to the Codeup database and an additional module named `env.py`. See project reproduction for more detail.
+The created modules used in this project below contain full comments an docstrings to better understand their operation. Where applicable, all functions used `random_state=123` at all times. Use of functions requires access credentials to the Codeup database and an additional module named `env.py`. See project reproduction for more detail.
 
 - [`acquire`](): contains functions used in initial data acquisition leading into the prepare phase
-- [`prepare`](): contains functions used to prepare data for exploration and visualization
-- [`explore`](): contains functions to visualize the prepared data and estimate the best drivers of property value
-- [`wrangle`](): contains functions to prepare data in the manner needed for specific project needs
-- [`model`  ](): contains functions to create, test models and visualize their performance
+- [`wrangle`](): contains functions to prepare data in the manner needed for this specific project needs
 
 ### VI. Project Reproduction
 ---
