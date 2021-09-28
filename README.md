@@ -9,12 +9,11 @@ I.   [Project Overview             ](#i-project-overview)
 
 II.  [Project Summary              ](#ii-project-summary)
 1.   [Goals                        ](#1-goals)
-2.   [Initial Thoughts & Hypothesis](#2-initial-thoughts--hypothesis)
-3.   [Findings & Next Phase        ](#3-findings--next-phase)
+2.   [Questions & Hypothesis       ](#2-questions--hypothesis)
+3.   [Findings                     ](#3-findings)
 
 III. [Data Context                 ](#iii-data-context)
-1.   [Database Relationships       ](#1-database-relationships)
-2.   [Data Dictionary              ](#2-data-dictionary)
+1.   [Data Dictionary              ](#1-data-dictionary)
 
 IV.  [Process                      ](#iv-process)
 1.   [Project Planning             ](#1-project-planning)
@@ -37,15 +36,18 @@ VI.  [Project Reproduction         ](#vi-project-reproduction)
 
 #### 1. Description
 
-This project serves to use clustering and linear regression methodologies to find drivers for `log_error` in *single-unit properties* sold in 2017 in the `zillow` database.
+The primary focus of the project was to incorporate clustering methodologies and discover potential drivers of the log_error of the Zillow® Zestimate focusing on single unit / single-family homes, using the 2017 properties and predictions data. In this context, log_error is equal to 𝑙𝑜𝑔(𝑍𝑒𝑠𝑡𝑖𝑚𝑎𝑡𝑒) − 𝑙𝑜𝑔(𝑆𝑎𝑙𝑒𝑃𝑟𝑖𝑐𝑒). I will present my findings and drivers of the log error through a notebook walkthough to my datascience team.
+
+- What is driving the errors in the Zestimates?
+- This notebook will be a continuation of my regression modeling. I am adding clustering methodologies to see what kind of improvements we can make.
 
 #### 2. Deliverables
 
-- GitHub repository and [README](#finding-drivers-of-zestimate-errors) stating project overview, goals, findings, and summary
-- Jupyter [Notebook](xxxx) showing high-level view of process through data science pipeline
-    - See the [`exploration.ipynb`](xxx) notebook for a more detailed view through the exploration process
-    - See the [`modeling.ipynb`](https) notebook for a more detailed look into the twelve models created
-- Python module(s) to automate the data acquisition and preparation process
+- Final Report Notebook detailing all of my findings and methodologies.
+- Sections indicated with markdown headings in my final notebook with a good title and the documentation is sufficiently explanatory and of high quality
+- A Python module or modules that automate the data acquisistion and preparation process, imported and used in final notebook
+- README file that details the project specs, planning, key findings, and steps to reproduce
+
 
 
 ### II. Project Summary
@@ -53,33 +55,61 @@ This project serves to use clustering and linear regression methodologies to fin
 
 #### 1. Goals
 
-The primary focus of the project was to incorporate clustering methodologies and discover potential drivers of the log_error of the Zillow® Zestimate for single-unit properties sold during 2017. In this context, log_error is equal to 𝑙𝑜𝑔(𝑍𝑒𝑠𝑡𝑖𝑚𝑎𝑡𝑒) − 𝑙𝑜𝑔(𝑆𝑎𝑙𝑒𝑃𝑟𝑖𝑐𝑒). After sufficient exploration, these potential drivers would be used as features in predicting the log_error with linear regression algorithms. In attempt to find these drivers, clustering methodologies were used to explore any meaningful groups that are present in the data.
+- The primary focus of the project was to incorporate clustering methodologies and discover potential drivers of the log_error of the Zillow® Zestimate for single-unit properties sold during 2017. In this context, log_error is equal to 𝑙𝑜𝑔(𝑍𝑒𝑠𝑡𝑖𝑚𝑎𝑡𝑒) − 𝑙𝑜𝑔(𝑆𝑎𝑙𝑒𝑃𝑟𝑖𝑐𝑒). 
+- Create modules storing functions of each step of the data pipeline
+- Thoroughly document each step
+- Construct at least 4 models
+- Make sure project is reproduceable
 
-#### 2. Initial Thoughts & Hypothesis
+#### 2. Questions & Hypothesis
+
+- Is there a correlation between logerror and bathroom count
+- Is there a correlation between logerror and lot size square feet
+- Is there a correlation between logerror and calculated finished square feet
+- Is there a relationship between logerror and bedroom count
+
+
+## Hypothesis 1: Correlation Test (Logerror vs Bathroomcnt)
+- $H_0$: There is no correlation between logerror and taxamount
+- $H_a$: There ia a correlation between logerror and taxamount
+
+## Hypothesis 2: Correlation Test (Logerror vs Lot size squarefeet)
+- $H_0$: There is no correlation between logerror and lotsizesquarefeet
+- $H_a$: There is a correlation between logerror and lotsizesquarefeet
+
+## Hypothesis 3: Correlation Test ( Logerror vs Calculated finished square feet)
+- $H_0$: There is no correlation between logerror and calculatedfinishedsquarefeet
+- $H_a$: There is a correlation between logerror and calculatedfinishedsquarefeet
+
+## Hypothesis 4: T-Test (Logerror vs Bedroomcnt)
+- $H_0$: There is no relationship between logerror and bedroomcnt
+- $H_a$: There is a relationship between logerror and bedroomcnt
 
 
 
-#### 3. Findings & Next Phase
+### 3. Findings
+#### My findings are:
+- The tests rejected all four Null Hypothesis
+- There is a relationship between these features and logerror
+- The 2nd Degree Ploynomial regression model performed the best
 
+model	rmse_train	rmse_validate
+0	mean_baseline	0.16828	0.15740
+1	Model 1: OLS	0.16813	0.15738
+2	Model 2: LassoLars (alpha 2)	0.16828	0.15740
+3	Model 3: Polynomial Regression (degree=2)	0.16806	0.15743
+4	Model 4: OLS (Unscaled Data)	0.16813	0.15738
 
 
 ### III. Data Context
 ---
 
-#### 1. Database Relationships
-
-
-
-
-
-#### 2. Data Dictionary
+#### 1. Data Dictionary
 
 Following acquisition and preparation of the initial SQL database, the DataFrames used in this project contain the following variables. Contained values are defined along with their respective data types.
 
 | Variable               | Definition                                         | Data Type  |
-|:----------------------:|:--------------------------------------------------:|:----------:|
-| acreage                | conversion of lot_square_feet into acres           | float64    |
-| age                    | age of property as of 2017                         | int64      |
+|:----------------------:|:--------------------------------------------------:|:----------:|     |
 | bathrooms              | count of full- and half-bathrooms                  | float64    |
 | bed_sqft_age_clstr_#   | boolean for five clusters of bed_sqft_age          | uint8      |
 | bedrooms               | count of bedrooms                                  | int64      |
@@ -127,41 +157,40 @@ Following acquisition and preparation of the initial SQL database, the DataFrame
 
 - [x] Obtain initial data and understand its structure
     - Obtain data from Codeup database with appropriate SQL query
-- [] Remedy any inconsistencies, duplicates, or structural problems within data
-- [] Perform data summation
+- [x] Remedy any inconsistencies, duplicates, or structural problems within data
+- [x] Perform data summation
 
 #### 3. Data Preparation
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ 🟢 **Prepare** ➜ ☐ _Explore_ ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
-- [] Address missing or inappropriate values, including outliers
-- [] Plot distributions of variables
-- [] Encode categorical variables
-- [] Consider and create new features as needed
-- [] Split data into `train`, `validate`, and `test`
+- [x] Address missing or inappropriate values, including outliers
+- [x] Plot distributions of variables
+- [x] Consider and create new features as needed
+- [x] Split data into `train`, `validate`, and `test`
 
 #### 4. Data Exploration
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ 🟢 **Explore** ➜ ☐ _Model_ ➜ ☐ _Deliver_
 
-- [] Visualize relationships of variables
-- [] Formulate hypotheses
-- [] Use clustering methodology in exploration of data
+- [x] Visualize relationships of variables
+- [x] Formulate hypotheses
+- [x] Use clustering methodology in exploration of data
     - Perform statistical testing and visualization
     - Use at least 3 combinations of features
     - Document takeaways of each clustering venture
     - Create new features with clusters if applicable
-- [] Perform statistical tests
-- [] Decide upon features and models to be used
+- [x] Perform statistical tests
+- [x] Decide upon features and models to be used
 
 #### 5. Modeling & Evaluation
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ ✓ _Explore_ ➜ 🟢 **Model** ➜ ☐ _Deliver_
 
-- [] Establish baseline prediction
-- [] Create, fit, and predict with models
+- [x] Establish baseline prediction
+- [x] Create, fit, and predict with models
     - Create at least four different models
     - Use different configurations of algorithms, hyper parameters, and/or features
-- [] Evaluate models with out-of-sample data
-- [] Utilize best performing model on `test` data
-- [] Summarize, visualize, and interpret findings
+- [x] Evaluate models with out-of-sample data
+- [x] Utilize best performing model on `test` data
+- [x] Summarize, visualize, and interpret findings
 
 #### 6. Product Delivery
 ✓ _Plan_ ➜ ✓ _Acquire_ ➜ ✓ _Prepare_ ➜ ✓ _Explore_ ➜ ✓ _Model_ ➜ 🟢 **Deliver**
