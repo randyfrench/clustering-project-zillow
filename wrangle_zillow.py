@@ -2,12 +2,15 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import itertools
 import os
 import env
 
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.cluster import KMeans
 
 sql_query = """
        SELECT prop.*,
@@ -213,6 +216,43 @@ def min_max_scaler(X_train, X_validate, X_test, numeric_cols):
         X_test[i] = X_test_scaled[i]
         
     return X_train, X_validate, X_test
+
+# CREATE CLUSTERS
+
+def create_cluster(df, X, k, col_name = None):
+    
+    ''' 
+    This function takes in df, X (dataframe with variables you want to cluster on) and k
+    It scales the X, calcuates the clusters and return train (with clusters), the Scaled dataframe,
+    the scaler and kmeans object and scaled centroids as a dataframe
+    '''
+    scaler = StandardScaler(copy=True).fit(X)
+    X_scaled = pd.DataFrame(scaler.transform(X), columns=X.columns.values).set_index([X.index.values])
+    kmeans = KMeans(n_clusters = k, random_state = 123)
+    kmeans.fit(X_scaled)
+    centroids_scaled = pd.DataFrame(kmeans.cluster_centers_, columns = list(X))
+    
+    if col_name == None:
+        #clusters on dataframe 
+        df[f'clusters_{k}'] = kmeans.predict(X_scaled)
+    else:
+        df[col_name] = kmeans.predict(X_scaled)
+    
+    
+    return df, X_scaled, scaler, kmeans, centroids_scaled
+
+# GROUP SCATTERPLOT
+
+def scatter_plots(X_scaled, col_name= 'column_one', col_name_two= 'column_two'):
+    '''
+    This function takes in two columns and 
+    creates a range of scatter plots based on varying k values
+    '''
+    fig, axs = plt.subplots(2, 2, figsize=(10, 10), sharex=True, sharey=True)
+    for ax, k in zip(axs.ravel(), range(2, 6)):
+        clusters = KMeans(k).fit(X_scaled).predict(X_scaled)
+        ax.scatter(X_scaled[col_name], X_scaled[col_name_two], c=clusters)
+        ax.set(title='k = {}'.format(k), xlabel=col_name, ylabel=col_name_two)
 
 def outlier_function(df, cols, k):
 	#function to detect and handle oulier using IQR rule
