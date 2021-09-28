@@ -68,9 +68,10 @@ The primary focus of the project was to incorporate clustering methodologies and
 #### 2. Key findings:
 - The tests rejected all four Null Hypothesis
 - There is a relationship between these features and logerror
-- The 2nd Degree Ploynomial regression model performed the best
+- The 2nd Degree Ploynomial regression model performed the best, predict sale values thus reducing logerror, but only by 0.00016
 
 #### 3. Recommendations:
+- It seemed that in my hypothesis testing that the tests I performed had correlation, but when models were tested, they proved to be too week to be strong drivers or provide any insights
 - I would like to continue to look into other features to use for clusters (such as age vs sqft)
 - I would like to perform more testing to find better models to use to determine logerror
 
