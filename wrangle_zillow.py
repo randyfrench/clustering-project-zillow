@@ -56,8 +56,8 @@ def get_zillow():
 
 
 def handle_missing_values(df, prop_required_column = .5, prop_required_row = .70):
-	#function that will drop rows or columns based on the percent of values that are missing:\
-	#handle_missing_values(df, prop_required_column, prop_required_row
+    # function that will drop rows or columns based on the percent of values that are missing:\
+    # handle_missing_values(df, prop_required_column, prop_required_row
     threshold = int(round(prop_required_column*len(df.index),0))
     df = df.dropna(axis=1, thresh=threshold)
     threshold = int(round(prop_required_row*len(df.columns),0))
@@ -67,7 +67,7 @@ def handle_missing_values(df, prop_required_column = .5, prop_required_row = .70
 
 
 def remove_columns(df, cols_to_remove):
-	#remove columns not needed
+    # remove columns not needed
     df = df.drop(columns=cols_to_remove)
     
     return df
@@ -91,11 +91,11 @@ def zillow_split(df, target):
     Returns train, validate, test, X_train, y_train, X_validate, y_validate, X_test, y_test as partitions
     and prints out the shape of train, validate, test
     '''
-    #create train and validate and test datasets
+    # create train and validate and test datasets
     train_and_validate, test = train_test_split(df, train_size=0.8, random_state=123)
     train, validate = train_test_split(train_and_validate, train_size=0.75, random_state=123)
 
-    #Split into X and y
+    # Split into X and y
     X_train = train.drop(columns=[target])
     y_train = train[target]
 
@@ -164,22 +164,6 @@ def wrangle_zillow():
 
     return df
 
-# def min_max_scaler(train_input, valid_input, test_input, numeric_cols):
-    '''
-    Uses the train & test datasets created by the split_my_data function
-    Returns 3 items: mm_scaler, train_scaled_mm, test_scaled_mm
-    This is a linear transformation. Values will lie between 0 and 1
-    '''
-   # train = train_input.copy()
-   # valid = valid_input.copy()
-   # test = test_input.copy()
-   # num_vars = list(train.select_dtypes('number').columns)
-   # scaler = MinMaxScaler()
-   # train[num_vars] = scaler.fit_transform(train[num_vars])
-   # valid[num_vars] = scaler.transform(valid[num_vars])
-   # test[num_vars] = scaler.transform(test[num_vars])
-    
-   # return scaler, train, valid, test\*
 
 # MIN MAX SCALER 
 
@@ -255,7 +239,7 @@ def scatter_plots(X_scaled, col_name= 'column_one', col_name_two= 'column_two'):
         ax.set(title='k = {}'.format(k), xlabel=col_name, ylabel=col_name_two)
 
 def outlier_function(df, cols, k):
-	#function to detect and handle oulier using IQR rule
+    # function to detect and handle oulier using IQR rule
     for col in df[cols]:
         q1 = df.annual_income.quantile(0.25)
         q3 = df.annual_income.quantile(0.75)
