@@ -121,6 +121,8 @@ The primary focus of the project was to incorporate clustering methodologies and
 - RMSE for Polynomial Model, degrees=2
   - Training/In-Sample:  0.16812589644110204 
   - Validation/Out-of-Sample:  0.16581584996771273
+  
+- It seemed that in my hypothesis testing that the tests I performed had correlation, but when models were tested, they proved to be too week to be strong drivers or provide any insights
 
 
 ### IV. Data Context
